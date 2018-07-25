@@ -41,6 +41,14 @@ jobs:
             - dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
+          name: Install shellcheck
+          command: |
+            - apt install xz-utils
+            - wget https://storage.googleapis.com/shellcheck/shellcheck-v0.5.0.linux.x86_64.tar.xz
+            - tar --xz -xvf shellcheck-v0.5.0.linux.x86_64.tar.xz
+            - cp shellcheck-v0.5.0/shellcheck /usr/local/bin/
+
+      - run:
           name: Run linters
           command: bin/lint.sh
 
